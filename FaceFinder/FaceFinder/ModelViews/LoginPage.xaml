@@ -9,9 +9,9 @@
         <StackLayout Padding="40" BackgroundColor="#F7C244">
             <Image Source="Logo.png" Aspect="AspectFit"  />
 
-            <Entry Placeholder="Usuario" FlowDirection="MatchParent" x:Name="{ Binding Username }"/>
+            <Entry Placeholder="Usuario" FlowDirection="MatchParent" Text="{ Binding Username }"/>
 
-            <Entry Placeholder="Contraseña"  IsPassword="True" x:Name="{Binding Passworld}"/>
+            <Entry Placeholder="Contraseña"  IsPassword="True" Text="{Binding Passworld}"/>
 
             <Button Text="Ingresar"  Font="Default" FontAttributes="Bold,Italic" IsEnabled="{Binding IsEnabled}" Command="{Binding ValidationCommand}"></Button>
 

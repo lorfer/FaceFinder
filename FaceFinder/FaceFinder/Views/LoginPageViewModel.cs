@@ -14,6 +14,22 @@ namespace FaceFinder.Views
 
         private string _username;
         private string _passworld;
+        private bool _isRunning;
+        private bool _isEnabled;
+
+        public bool IsEnabled
+        {
+            get { return  _isEnabled; }
+            set {  _isEnabled = value; }
+        }
+
+
+        public bool IsRunning
+        {
+            get { return _isRunning; }
+            set { _isRunning = value; }
+        }
+
         public LoginPageViewModel()
         {
 
@@ -46,7 +62,7 @@ namespace FaceFinder.Views
             }
             else
             {
-
+                await Application.Current.MainPage.DisplayAlert("Error", "Por favor revisA \n tu nombre de usuario o contraseña", "Ok");
             }
 
 
