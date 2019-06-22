@@ -19,8 +19,14 @@ namespace FaceFinder.Views
 
         public bool IsEnabled
         {
-            get { return  _isEnabled; }
-            set {  _isEnabled = value; }
+            get { return  !_isEnabled; }
+            set {
+                    if (_isEnabled)
+                    {
+                        _isEnabled = value;
+                    OnPropertyChanged("IsEnabled");
+                    }
+                 }
         }
 
 
@@ -54,9 +60,11 @@ namespace FaceFinder.Views
 
         async void ValidationCommand()
         {
+            _isEnabled = false;
+            await Task.Delay(3000);
             if (_username.Contains("name@mail.com") && _passworld.Contains("admin123"))
             {
-                await Task.Delay(3000);
+               
                 await Application.Current.MainPage.Navigation.PushAsync(new MainPage());
 
             }

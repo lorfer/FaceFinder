@@ -15,7 +15,7 @@ namespace FaceFinder.ModelView
         public LoginPage()
         {
             InitializeComponent();
-            BindingContext = new ViewsModel.LoginPageViewModel();
+            BindingContext = new Views.LoginPageViewModel();
            
         }
 

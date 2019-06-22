@@ -7,15 +7,15 @@
              x:Class="FaceFinder.ModelView.LoginPage">
     <ContentPage.Content>
         <StackLayout Padding="40" BackgroundColor="#F7C244">
-            <Image Source="Logo.png" Aspect="AspectFit"  />
+            <Image Source="logo.png" Aspect="AspectFit"  />
 
             <Entry Placeholder="Usuario" FlowDirection="MatchParent" Text="{ Binding Username }"/>
 
             <Entry Placeholder="Contraseña"  IsPassword="True" Text="{Binding Passworld}"/>
 
-            <Button Text="Ingresar"  Font="Default" FontAttributes="Bold,Italic" IsEnabled="{Binding IsEnabled}" Command="{Binding ValidationCommand}"></Button>
+            <Button Text="Ingresar" Font="defaut" FontAttributes="Bold,Italic" IsEnabled="{Binding IsEnabled}" Command="{Binding ValidationCommand}"></Button>
 
-            <ActivityIndicator IsRunning="{Binding IsRunning}" IsVisible= "{Binding  IsVisible}"   Color="Black"/>
+            <ActivityIndicator  IsRunning="{Binding IsRunning}" IsVisible= "{Binding  IsVisible}"   Color="Black"/>
 
         </StackLayout>
     </ContentPage.Content>
