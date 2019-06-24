@@ -10,63 +10,74 @@ namespace FaceFinder.Views
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public ICommand DisplayNameCommand { get; private set; }
-        //Propeties Binding whith the View Mode
 
         private string _username;
         private string _passworld;
-        private bool _isRunning;
-        private bool _isEnabled;
 
-        public bool IsEnabled
-        {
-            get { return  !_isEnabled; }
-            set {
-                    if (_isEnabled)
-                    {
-                        _isEnabled = value;
-                    OnPropertyChanged("IsEnabled");
-                    }
-                 }
-        }
+        private bool _isBusy;
 
-
-        public bool IsRunning
-        {
-            get { return _isRunning; }
-            set { _isRunning = value; }
-        }
+       
 
         public LoginPageViewModel()
         {
 
-            DisplayNameCommand = new Command(ValidationCommand);
+            DisplayNameCommand = new Command(ValidationCommand, CanExecuteValue);
 
+        }
+
+         private bool CanExecuteValue()
+        {
+            return !IsBusy;
+        }
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set {
+                if (_isBusy != value)
+                {
+                    _isBusy = value;
+                    ((Command)DisplayNameCommand).ChangeCanExecute();
+                }
+                    
+                }
         }
 
         public string Passworld
         {
+            get
+            {
+                return _passworld;
+            }
             set {
                 _passworld = value;
+                OnPropertyChanged(nameof(Passworld));
             }
         }
 
         public string Username
         {
+            get
+            {
+                return _username;
+            }
             set
             {
-                    _username = value;
+                _username = value;
+                OnPropertyChanged(nameof(Username));
             }
         }
 
+       
+
         async void ValidationCommand()
         {
-            _isEnabled = false;
+            
             await Task.Delay(3000);
             if (_username.Contains("name@mail.com") && _passworld.Contains("admin123"))
             {
-               
-                await Application.Current.MainPage.Navigation.PushAsync(new MainPage());
-
+                // await Application.Current.MainPage.Navigation.PushAsync(new MainPage());
+                 Application.Current.MainPage.Navigation.InsertPageBefore(new HomePage(), new ModelView.LoginPage());
+                await Application.Current.MainPage.Navigation.PopAsync();
             }
             else
             {
