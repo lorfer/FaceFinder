@@ -9,12 +9,16 @@ namespace FaceFinder
         public App()
         {
             InitializeComponent();
-        //https://devblogs.microsoft.com/wp-content/uploads/sites/44/2019/03/data-binding@2x1.png
-            MainPage = new ModelView.LoginPage();
+            //https://devblogs.microsoft.com/wp-content/uploads/sites/44/2019/03/data-binding@2x1.png 
+              
+            MainPage = new NavigationPage(new ModelView.LoginPage());
         }
 
         protected override void OnStart()
         {
+
+            
+
             // Handle when your app starts
         }
 

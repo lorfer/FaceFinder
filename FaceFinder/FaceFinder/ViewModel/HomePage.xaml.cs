@@ -7,20 +7,15 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace FaceFinder.ModelView
+namespace FaceFinder.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class HomePage : ContentPage
     {
-        public LoginPage()
+        public HomePage()
         {
             InitializeComponent();
-            BindingContext = new Views.LoginPageViewModel();
-           
+            BindingContext = new BaseViewModel();
         }
-
-       
-           
-     
     }
 }

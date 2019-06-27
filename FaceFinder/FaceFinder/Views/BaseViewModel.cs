@@ -2,45 +2,42 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.Text;
 
 
 namespace FaceFinder.Views
 {
-    class LoginPageViewModel : INotifyPropertyChanged
+    class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public ICommand DisplayNameCommand { get; private set; }
 
-        private string _username;
-        private string _passworld;
+        private string _username="";
+        private string _passworld="";
+        private bool _isrunning;
 
-        private bool _isBusy;
-
-       
-
-        public LoginPageViewModel()
+        public BaseViewModel()
         {
-
             DisplayNameCommand = new Command(ValidationCommand, CanExecuteValue);
-
         }
 
+        public bool IsRunning
+        {
+            get { return _isrunning; }
+            set {
+                 if (_isrunning != value)
+                 {
+                    _isrunning = value;
+                    ((Command)DisplayNameCommand).ChangeCanExecute();
+                    }
+                }
+        }
+        
          private bool CanExecuteValue()
         {
-            return !IsBusy;
+            return !_isrunning;
         }
-        public bool IsBusy
-        {
-            get { return _isBusy; }
-            set {
-                if (_isBusy != value)
-                {
-                    _isBusy = value;
-                    ((Command)DisplayNameCommand).ChangeCanExecute();
-                }
-                    
-                }
-        }
+       
 
         public string Passworld
         {
@@ -68,20 +65,23 @@ namespace FaceFinder.Views
         }
 
        
-
         async void ValidationCommand()
         {
-            
-            await Task.Delay(3000);
+           
             if (_username.Contains("name@mail.com") && _passworld.Contains("admin123"))
-            {
-                // await Application.Current.MainPage.Navigation.PushAsync(new MainPage());
-                 Application.Current.MainPage.Navigation.InsertPageBefore(new HomePage(), new ModelView.LoginPage());
-                await Application.Current.MainPage.Navigation.PopAsync();
+            {  
+                 _isrunning = true;
+                await Task.Delay(3000);
+                _isrunning = false;
+                //await Application.Current.MainPage.Navigation.PushAsync(new MainPage());
+                await Application.Current.MainPage.Navigation.PushAsync(new HomePage());
+               // await Application.Current.MainPage.Navigation.PopAsync();
+               
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Por favor revisA \n tu nombre de usuario o contraseña", "Ok");
+                await Application.Current.MainPage.DisplayAlert("Error", "Por favor revisa tu nombre de usuario o contraseña", "Ok");
+
             }
 
 
@@ -92,7 +92,6 @@ namespace FaceFinder.Views
             var changed = PropertyChanged;
             if (changed != null)
             {
-
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
