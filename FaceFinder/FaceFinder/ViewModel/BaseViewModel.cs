@@ -7,27 +7,27 @@ using System.Text;
 
 namespace FaceFinder.Views
 {
-    class BaseViewModel : INotifyPropertyChanged
+  public  class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public ICommand DisplayNameCommand { get; private set; }
 
         private string _username="";
         private string _passworld="";
-        private bool _isrunning;
+        private bool _IsBusy;
 
         public BaseViewModel()
         {
             DisplayNameCommand = new Command(ValidationCommand, CanExecuteValue);
         }
 
-        public bool IsRunning
+        public bool IsBusy
         {
-            get { return _isrunning; }
+            get { return _IsBusy; }
             set {
-                 if (_isrunning != value)
+                 if (_IsBusy != value)
                  {
-                    _isrunning = value;
+                    _IsBusy = value;
                     ((Command)DisplayNameCommand).ChangeCanExecute();
                     }
                 }
@@ -35,7 +35,7 @@ namespace FaceFinder.Views
         
          private bool CanExecuteValue()
         {
-            return !_isrunning;
+            return !_IsBusy;
         }
        
 
@@ -70,9 +70,9 @@ namespace FaceFinder.Views
            
             if (_username.Contains("name@mail.com") && _passworld.Contains("admin123"))
             {  
-                 _isrunning = true;
+                 _IsBusy = true;
                 await Task.Delay(3000);
-                _isrunning = false;
+                _IsBusy = false;
                 //await Application.Current.MainPage.Navigation.PushAsync(new MainPage());
                 await Application.Current.MainPage.Navigation.PushAsync(new HomePage());
                // await Application.Current.MainPage.Navigation.PopAsync();

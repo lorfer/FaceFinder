@@ -8,13 +8,13 @@
     <ContentPage.Content>
         <StackLayout Padding="40" BackgroundColor="#F7C244">
             <Image Source="logo.png" Aspect="AspectFit"  />
-            <ActivityIndicator  IsRunning ="{Binding IsRunning}"  IsVisible="{Binding IsRunning}" VerticalOptions="Center"  Color="Black"/>
+            
             <Entry Placeholder="Usuario" FlowDirection="MatchParent" Text="{ Binding Username }"/>
 
             <Entry Placeholder="Contraseña"  IsPassword="True" Text="{Binding Passworld}"/>
 
             <Button Text="Ingresar" Font="defaut" FontAttributes="Bold,Italic"  Command="{Binding DisplayNameCommand}"></Button>
-
+        <ActivityIndicator  IsRunning ="{Binding IsBusy}"  IsVisible="{Binding IsBusy}" VerticalOptions="Center"  Color="Black"/>
             
 
         </StackLayout>
