@@ -13,74 +13,63 @@ namespace FaceFinder.ViewModel
     class HomePageViewModel:BaseViewModel
     {
         //This Variable send a other Page the OBj
-        private INavigation navigation;
-        private string _CriminalSelect = "Select a Criminal";
-        private PersonWanted _personWanted;
+    //    private string _CriminalSelect = "Select a Criminal";
+        private PersonWanted criminalSelected;
         public ObservableCollection<PersonWanted> PersonWanteds { get; private set; }
+        public ICommand ViewDetailsCommand { get; set; }
+        
 
-        public PersonWanted PersonWanted
+
+        public HomePageViewModel()
         {
-            get { return _personWanted; }
+            GetCriminals();
+            PersonWanteds = new ObservableCollection<PersonWanted>();
+            ViewDetailsCommand = new Command<PersonWanted>(GetDetailsACriminal);
+        }
+
+
+        public PersonWanted CriminalSelected
+        {
+            get { return criminalSelected; }
             set {
-                if (_personWanted == null)
+
+                criminalSelected = value;
+                if (criminalSelected == null)
                 {
                     return;
                 }
-                ViewDetailsCommand.Execute(nameof(PersonWanted));
-                _personWanted = null;
+                    ViewDetailsCommand.Execute(criminalSelected);
+                    CriminalSelected = null;
                 
             }
         }
 
-
-
-        public ICommand ViewDetailsCommand { get; private set ; }
-        public IObservable<PersonWanted> criminals;
-
-        public HomePageViewModel(PersonWanted criminal)
-        {
-            ViewDetailsCommand = new Command<PersonWanted>(GetDetailsACriminal);
-            PersonWanteds = new ObservableCollection<PersonWanted>();
-        }
-
         //Method For move the the other page
-        void GetDetailsACriminal(PersonWanted criminal)
+       void GetDetailsACriminal(PersonWanted obj)
         {
-            navigation.PushAsync(new CriminalDetailsPage(criminal));
+           Application.Current.MainPage.Navigation.PushAsync(new CriminalDetailsPage(obj));
         }
-
-        public string CriminalSelectd
+       //Method For loader a criminals
+        async void GetCriminals()
         {
-            get { return _CriminalSelect; }
-            set {
-                if (_CriminalSelect != value)
-                {
-                    _CriminalSelect = value;
-                    OnPropertyChanged(nameof(CriminalSelectd));
-                }
-            }
-        }
-
-
-       async void GetCriminal()
-        {
-            IsBusy = true;
-            await Task.Delay(3000);
+            //IsBusy = true;
+           await Task.Delay(3000);
             var losPillos = GetPersonWanteds();
 
             foreach (var item in losPillos)
             {
                 PersonWanteds.Add(item);
             }
-            IsBusy = false;
+           // IsBusy = false;
         }
         //This method Create a list of Person wanted
-       public ObservableCollection<PersonWanted> GetPersonWanteds()
+        public ObservableCollection<PersonWanted> GetPersonWanteds()
         {
             return new ObservableCollection<PersonWanted>{
 
                 new PersonWanted
                 {
+                    PhotoUrl = "logo.png",
                     Name= "Fernando Garcia",
                     NickName = "El Chapo",
                     Age = 23,
@@ -89,11 +78,13 @@ namespace FaceFinder.ViewModel
 
                 new PersonWanted
                 {
+                    PhotoUrl = "logo.png",
                     Name= "Angel Garcia",
                     NickName = "El ticher",
                     Age = 26,
                     WantedReasons = "Enseña como robarle a la NASA"
                 }
+             
             };
         }
 

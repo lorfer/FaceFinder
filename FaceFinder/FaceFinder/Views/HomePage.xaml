@@ -8,32 +8,38 @@
              Title="Personas Buscadas" >
 
     <ContentPage.Content>
-        
+
         <StackLayout Padding="30" BackgroundColor="#F7C244">
-            
-            
-            <Label 
-             Text="Cargando Criminales "   
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-                FontSize="Medium"
-                Margin="0,10"
-                TextColor="Black"
-             ></Label>
-            <ActivityIndicator
-                IsVisible="{Binding IsBusy}"
-                IsRunning="{Binding IsBusy}"
-                Color="Black"
-                VerticalOptions="Center">
-            </ActivityIndicator>
 
             <Label
                 Text="FBI THE MOST WANTED"
+                Margin="0,10"
+                TextColor="Black"
                 VerticalOptions="Center"
-                FontSize="Medium"
+                HorizontalOptions="Center"
+                FontSize="Large"
                ></Label>
-            
-            
+
+            <ActivityIndicator  Color="Black" IsRunning="{Binding IsRunning}" IsEnabled="{Binding IsRunning}" IsVisible="{Binding IsRunning}"/>
+
+            <ListView
+                ItemsSource="{Binding  PersonWanteds}" 
+                SelectedItem="{Binding  CriminalSelected}"
+                CachingStrategy="RecycleElement"
+                RowHeight="80"
+                >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell
+                            ImageSource="{Binding PhotoUrl}"
+                            Text="{Binding Name}"
+                            Detail="{Binding NickName }">
+                            
+                        </ImageCell>
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

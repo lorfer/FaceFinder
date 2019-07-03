@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using FaceFinder.ModelView;
+using Xamarin.Forms;
 
 
 
@@ -10,8 +11,8 @@ namespace FaceFinder
         {
             InitializeComponent();
             //https://devblogs.microsoft.com/wp-content/uploads/sites/44/2019/03/data-binding@2x1.png 
-              
-            MainPage = new NavigationPage(new ModelView.LoginPage());
+
+            MainPage = new NavigationPage( new LoginPage());
         }
 
         protected override void OnStart()

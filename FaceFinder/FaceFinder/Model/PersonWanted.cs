@@ -7,7 +7,6 @@ namespace FaceFinder.Model
     public class PersonWanted
     {
         //This is the MODEL Of VIEW HOME PAGE
-        public PersonWanted() { }
 
         public string Name { get; set; }
         public string NickName { get; set; }

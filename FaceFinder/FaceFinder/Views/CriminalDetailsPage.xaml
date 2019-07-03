@@ -5,11 +5,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="FaceFinder.Views.CriminalDetailsPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+    
+    <ContentPage.Content >
+         <ScrollView Orientation="Vertical" Padding="30" >
+        <StackLayout BackgroundColor="#F7C244" Padding="40">
+           
+            <Image Source="{Binding PhotoUrl}"
+                   Aspect="AspectFill"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Label Text="{Binding Name}"
+                   FontSize="Large"
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand"
+                   
+             ></Label>
+            <Label Text="{Binding NickName}"
+                   FontSize="Large"
+
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand"
+                   
+             ></Label>
+
+            <Label Text="{Binding Age } "
+                   FontSize="Large"
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand"
+                   
+             ></Label>
+
+
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
+
+
 </ContentPage>

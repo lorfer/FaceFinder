@@ -18,7 +18,7 @@ namespace FaceFinder.Views
         {
             
             InitializeComponent();
-            BindingContext = new HomePageViewModel(person);
+            BindingContext = new CriminalDetailsViewModel(person);
         }
     }
 }

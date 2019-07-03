@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FaceFinder.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace FaceFinder.ModelView
         public LoginPage()
         {
             InitializeComponent();
-            BindingContext = new Views.BaseViewModel();
+            BindingContext = new LoginPageViewModel();
            
         }
 
